@@ -13,7 +13,7 @@ st.set_page_config(
 @st.cache_data
 def load_accuracy_data():
     """Load the Day 1 and Day 2 accuracy data."""
-    DATA_FILENAME = Path(__file__).parent / 'data/gdp_data.csv'
+    DATA_FILENAME = Path(__file__).parent / 'data/data/combined_2.csv'
     accuracy_df = pd.read_csv(DATA_FILENAME)
     return accuracy_df
 
