@@ -7,12 +7,11 @@ import seaborn as sns
 import streamlit as st
 
 # Set the title and favicon for the Browser's tab bar
+
 st.set_page_config(
     page_title='Accuracy Dashboard',
     page_icon='b',
-    layout="centered",
-    initial_sidebar_state="auto",
-    theme={"base": "dark", "backgroundColor": "#333333", "primaryColor": "#1DB954", "textColor": "#FFFFFF"}
+    layout="centered"
 )
 
 # Load and cache the data to avoid reloading it every time
