@@ -48,7 +48,6 @@ seaborn_palette = sns.color_palette("Set2", len(groups))
 color_sequence = [f"rgb({int(r*255)}, {int(g*255)}, {int(b*255)})" for r, g, b in seaborn_palette]
 
 # Loop over selected measures to create a line graph for each
-# Loop over selected measures to create a line graph for each
 for measure in selected_measures:
     measure_data = filtered_df[filtered_df['Measure'] == measure]
     
