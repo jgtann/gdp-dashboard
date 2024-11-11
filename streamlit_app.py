@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
+import seaborn as sns
 
 # Set the title and favicon for the Browser's tab bar
 st.set_page_config(
@@ -52,6 +53,10 @@ for measure in selected_measures:
 
 # Summary statistics and growth display
 st.header("Summary of Day 1 and Day 2 Changes")
+
+# Define a Seaborn color palette and convert to hex for Plotly
+seaborn_palette = sns.color_palette("Set2", len(groups))
+color_sequence = [f"rgb({int(r*255)}, {int(g*255)}, {int(b*255)})" for r, g, b in seaborn_palette]
 
 for group in selected_groups:
     day_1_data = filtered_df[(filtered_df['Group'] == group) & (filtered_df['Day'] == "Day 1")]
