@@ -4,10 +4,15 @@ import plotly.express as px
 from pathlib import Path
 import seaborn as sns
 
+import streamlit as st
+
 # Set the title and favicon for the Browser's tab bar
 st.set_page_config(
     page_title='Accuracy Dashboard',
     page_icon='b',
+    layout="centered",
+    initial_sidebar_state="auto",
+    theme={"base": "dark", "backgroundColor": "#333333", "primaryColor": "#1DB954", "textColor": "#FFFFFF"}
 )
 
 # Load and cache the data to avoid reloading it every time
@@ -39,6 +44,11 @@ filtered_df = accuracy_df[(accuracy_df['Measure'].isin(selected_measures)) &
 # Plot for selected measures and groups
 st.header("Measure Comparisons by Day")
 
+# Define a Seaborn color palette and convert to hex for Plotly
+seaborn_palette = sns.color_palette("Set2", len(groups))
+color_sequence = [f"rgb({int(r*255)}, {int(g*255)}, {int(b*255)})" for r, g, b in seaborn_palette]
+
+# Loop over selected measures to create a line graph for each
 # Loop over selected measures to create a line graph for each
 for measure in selected_measures:
     measure_data = filtered_df[filtered_df['Measure'] == measure]
@@ -47,16 +57,19 @@ for measure in selected_measures:
         measure_data, 
         x="Day", y="Mean", color="Group", 
         markers=True, title=f"{measure} Over Days by Group",
-        labels={"Mean": f"Mean {measure}", "Day": "Day"}
+        labels={"Mean": f"Mean {measure}", "Day": "Day"},
+        color_discrete_sequence=color_sequence  # Apply custom color sequence here
     )
+    
+    # Render the figure in Streamlit
     st.plotly_chart(fig)
+
+# Adjust line width
+    fig.update_traces(line=dict(width=4))  # Increase the width as needed
 
 # Summary statistics and growth display
 st.header("Summary of Day 1 and Day 2 Changes")
 
-# Define a Seaborn color palette and convert to hex for Plotly
-seaborn_palette = sns.color_palette("Set2", len(groups))
-color_sequence = [f"rgb({int(r*255)}, {int(g*255)}, {int(b*255)})" for r, g, b in seaborn_palette]
 
 for group in selected_groups:
     day_1_data = filtered_df[(filtered_df['Group'] == group) & (filtered_df['Day'] == "Day 1")]
