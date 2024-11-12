@@ -24,7 +24,7 @@ def load_accuracy_data():
 accuracy_df = load_accuracy_data()
 
 # Title and introductory text
-st.title("Day 1 and Day 2 Accuracy Comparison Dashboard")
+#st.title("RQ1: Complexity and Accuracy Comparison")
 st.write("Compare the changes in measures across Day 1 and Day 2 for each experimental group.")
 
 # Select Measures and Groups
@@ -39,7 +39,7 @@ filtered_df = accuracy_df[(accuracy_df['Measure'].isin(selected_measures)) &
                           (accuracy_df['Group'].isin(selected_groups))]
 
 # Plot for selected measures and groups
-st.header("Measure Comparisons by Day")
+st.header("RQ1: Complexity and Accuracy Comparison")
 
 # Define a Seaborn color palette and convert to hex for Plotly
 seaborn_palette = sns.color_palette("Set2", len(groups))
@@ -61,7 +61,13 @@ for measure in selected_measures:
     st.plotly_chart(fig)
 
 # Adjust line width
-    fig.update_traces(line=dict(width=4))  # Increase the width as needed
+#    fig.update_traces(line=dict(width=4))  # Increase the width as needed
+
+# Update traces for bold and enlarged hover text
+fig.update_traces(
+    line=dict(width=4),
+    hovertemplate="<b style='font-size:200px;'>%{y}</b><extra></extra>"
+)
 
 # Summary statistics and growth display
 st.header("Summary of Day 1 and Day 2 Changes")
