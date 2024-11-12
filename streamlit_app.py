@@ -4,12 +4,10 @@ import plotly.express as px
 from pathlib import Path
 import seaborn as sns
 
-
-
 # Set the title and favicon for the Browser's tab bar
 
 st.set_page_config(
-    page_title='Accuracy Dashboard',
+    page_title='RQ1: Complexity and Accuracy Comparison',
     page_icon='b',
     layout="centered"
 )
