@@ -56,18 +56,19 @@ for measure in selected_measures:
         labels={"Mean": f"Mean {measure}", "Day": "Day"},
         color_discrete_sequence=color_sequence  # Apply custom color sequence here
     )
-    
+
+    # Update traces for bold and enlarged hover text
+    fig.update_traces(
+        line=dict(width=4),
+        hovertemplate="<b style='font-size:30px;'>%{y}</b><extra></extra>"
+    )
+
     # Render the figure in Streamlit
     st.plotly_chart(fig)
 
 # Adjust line width
 #    fig.update_traces(line=dict(width=4))  # Increase the width as needed
 
-# Update traces for bold and enlarged hover text
-fig.update_traces(
-    line=dict(width=4),
-    hovertemplate="<b style='font-size:200px;'>%{y}</b><extra></extra>"
-)
 
 # Summary statistics and growth display
 st.header("Summary of Day 1 and Day 2 Changes")
@@ -87,3 +88,14 @@ for group in selected_groups:
                 value=f"{d2_mean:.2f}", 
                 delta=f"{change:.2f}%" if not pd.isna(change) else "N/A"
             )
+
+# Increase font sizes for title, axes, and tick labels
+    fig.update_layout(
+        title=dict(font_size=20),  # Increase title font size
+        xaxis=dict(title=dict(font_size=16), tickfont=dict(size=14)),  # X-axis title and ticks
+        yaxis=dict(title=dict(font_size=16), tickfont=dict(size=14)),  # Y-axis title and ticks
+        hoverlabel=dict(
+            font_size=12,  # Set hover text font size
+            font_family="Arial"
+        )
+    )
