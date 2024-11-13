@@ -63,6 +63,16 @@ for measure in selected_measures:
         hovertemplate="<b style='font-size:30px;'>%{y}</b><extra></extra>"
     )
 
+    # Increase font sizes for title, axes, and tick labels
+    fig.update_layout(
+        title=dict(font_size=20),  # Increase title font size
+        xaxis=dict(title=dict(font_size=16), tickfont=dict(size=14)),  # X-axis title and ticks
+        yaxis=dict(title=dict(font_size=16), tickfont=dict(size=14)),  # Y-axis title and ticks
+        hoverlabel=dict(
+            font_size=12,  # Set hover text font size
+            font_family="Arial"
+        )
+    )
     # Render the figure in Streamlit
     st.plotly_chart(fig)
 
@@ -89,13 +99,3 @@ for group in selected_groups:
                 delta=f"{change:.2f}%" if not pd.isna(change) else "N/A"
             )
 
-# Increase font sizes for title, axes, and tick labels
-    fig.update_layout(
-        title=dict(font_size=20),  # Increase title font size
-        xaxis=dict(title=dict(font_size=16), tickfont=dict(size=14)),  # X-axis title and ticks
-        yaxis=dict(title=dict(font_size=16), tickfont=dict(size=14)),  # Y-axis title and ticks
-        hoverlabel=dict(
-            font_size=12,  # Set hover text font size
-            font_family="Arial"
-        )
-    )
